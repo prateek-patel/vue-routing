@@ -11,7 +11,12 @@ export default {
   props: ['id', 'name', 'memberCount'],
   computed: {
     teamMembersLink() {
-      return '/teams/' + this.id;
+      // return '/teams/' + this.id;
+      // advantage of named routes is that if we decide to change the route url
+      // we don't have to change everywhere because we are using route name
+      return {name: 'team-members', params: {teamId: this.id}};
+      // this can also be done in case we are navigating programmatically
+      // this.$router.push({name: 'team-members', params: {teamId: this.id}});
     },
   },
 };
