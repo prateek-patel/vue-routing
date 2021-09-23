@@ -17,6 +17,8 @@ const router = createRouter({
         // for 'alias' url doesn't change it loads as localhost:8080
         // { path: '/teams', component: TeamsList, alias: '/' },
         {
+            // advantage of "named routes" is that if we decide to change the route url
+            // we don't have to change everywhere because we are using route name
             name: 'teams',
             path: '/teams',
             components: { default: TeamsList, footer: TeamsFooter },
@@ -52,7 +54,14 @@ router.beforeEach(function (to, from, next) {
     console.log('Global beforeEach');
     console.log('to: ', to, 'from: ', from);
     next();
-})
+});
+
+router.afterEach(function (to, from) {
+    // can be used for sending analytics data
+    // this method is called after the navigation is done, so no next parameter as we cannot control the navigation.
+    console.log('Global afterEach');
+    console.log('to: ', to, 'from: ', from);
+});
 
 const app = createApp(App)
 
