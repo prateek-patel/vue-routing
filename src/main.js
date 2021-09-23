@@ -14,9 +14,14 @@ const router = createRouter({
         { path: '/', redirect: '/teams' },
         // for 'alias' url doesn't change it loads as localhost:8080
         // { path: '/teams', component: TeamsList, alias: '/' },
-        { path: '/teams', component: TeamsList },
+        {
+            path: '/teams',
+            component: TeamsList,
+            children: [
+                { path: ':teamId', component: TeamMembers, props: true },
+            ]
+        },
         { path: '/users', component: UsersList },
-        { path: '/teams/:teamId', component: TeamMembers, props: true },
         { path: '/:notFound(.*)', component: NotFound }
     ]
 });
