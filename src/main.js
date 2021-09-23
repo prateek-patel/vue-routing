@@ -28,13 +28,20 @@ const router = createRouter({
         { path: '/:notFound(.*)', component: NotFound }
     ],
     scrollBehavior(to, from, savedPosition) {
-        console.log('to: ', to, 'from: ', from, 'savedPosition: ', savedPosition);
+        // console.log('to: ', to, 'from: ', from, 'savedPosition: ', savedPosition);
         if (savedPosition) {
             return savedPosition;
         }
         return { left: 0, top: 0 };
     }
 });
+// navigation guards - useful if we want to warn user before navigating to new page
+// so that user doesn't lose unsaved data
+router.beforeEach(function (to, from, next) {
+    console.log('Global beforeEach');
+    console.log('to: ', to, 'from: ', from);
+    next();
+})
 
 const app = createApp(App)
 
