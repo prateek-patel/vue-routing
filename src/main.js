@@ -26,7 +26,14 @@ const router = createRouter({
         },
         { path: '/users', components: { default: UsersList, footer: UsersFooter } },
         { path: '/:notFound(.*)', component: NotFound }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        console.log('to: ', to, 'from: ', from, 'savedPosition: ', savedPosition);
+        if (savedPosition) {
+            return savedPosition;
+        }
+        return { left: 0, top: 0 };
+    }
 });
 
 const app = createApp(App)
