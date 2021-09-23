@@ -24,7 +24,18 @@ const router = createRouter({
                 { name: 'team-members', path: ':teamId', component: TeamMembers, props: true },
             ]
         },
-        { path: '/users', components: { default: UsersList, footer: UsersFooter } },
+        {
+            path: '/users',
+            components: {
+                default: UsersList,
+                footer: UsersFooter
+            },
+            beforeEnter(to, from, next) {
+                console.log('users beforeEnter');
+                console.log('to: ', to, 'from: ', from);
+                next();
+            }
+        },
         { path: '/:notFound(.*)', component: NotFound }
     ],
     scrollBehavior(to, from, savedPosition) {
